@@ -8,7 +8,7 @@ export function createID() {
 // const originalValue = new Map([['a', 1]]);
 // const str = JSON.stringify(originalValue, replacer);
 // const newValue = JSON.parse(str, reviver);
-export function mapReplacer(_, value) {
+export function mapReplacer(_: any, value: any) {
     if (value instanceof Map) {
         return {
             dataType: "Map",
@@ -19,7 +19,7 @@ export function mapReplacer(_, value) {
     }
 }
 
-export function mapReviver(_, value) {
+export function mapReviver(_: any, value: any) {
     if (typeof value === "object" && value !== null) {
         if (value.dataType === "Map") {
             return new Map(value.value);
