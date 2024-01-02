@@ -61,28 +61,33 @@ export class GCounter implements Mergable {
     }
 
     serialize() {
-        const serializedState: {
-            [siteID: SiteID]: number;
-        } = {};
+        const serializedState = {};
         for (const [siteID, max] of Object.entries(this.#state)) {
-            serializedState[siteID] = max.value;
+            serializedState[siteID as string] = max.value as number;
         }
         return JSON.stringify({ siteID: this.#siteID, state: serializedState });
     }
 
+    // Static method to create a GCounter instance from a state
+    static create(siteID: SiteID, state: GCounterState): GCounter {
+        const counter = new GCounter({ siteID: siteID, value: 0 });
+        counter.#state = state;
+
+        return counter;
+    }
+
+    // Static method to create a GCounter instance from a serialized state
     static hydrate(serializedState: string): GCounter {
         const { siteID, state } = JSON.parse(serializedState);
         const reconstructedState: GCounterState = {};
 
+        // Reconstruct the state, converting the serialized Max value to a Max instances
         for (const [key, serializedMax] of Object.entries(state)) {
             console.log(key, serializedMax);
             reconstructedState[key] = new Max(serializedMax as number);
         }
 
-        const counter = new GCounter({ siteID: siteID, value: 0 });
-        counter.#state = reconstructedState;
-
-        return counter;
+        return GCounter.create(siteID, reconstructedState);
     }
 }
 
