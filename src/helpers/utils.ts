@@ -4,6 +4,7 @@ export function createID() {
     return uuidv4();
 }
 
+// This is for serializing and deserializing Maps with JSON.stringify and JSON.parse
 // const originalValue = new Map([['a', 1]]);
 // const str = JSON.stringify(originalValue, replacer);
 // const newValue = JSON.parse(str, reviver);

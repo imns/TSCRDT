@@ -8,7 +8,7 @@
 -   [x] Vector
 -   [x] Hybrid Logical
 
-### Refisters
+### Registers
 
 -   [x] Last Write Wins (LWW)
 
@@ -19,10 +19,41 @@
 
 ### Sets
 
--   [x] GSet
--   [ ] ORSet - Add Wins
+-   [x] GSet (not ordered)
+-   [ ] 2P Set
+-   [ ] AWSet - Add Wins
 
 ### Sequences
 
--   [ ] LSEQ / Logroot
+-   [ ] Logroot
+-   [ ] LSEQ
 -   [ ] RGA
+-   [ ] Treedoc
+-   [ ] WooT
+-   [ ] Astrong
+
+#### Problems
+
+**Interleaving**
+
+> Merging creates a word salad. This happens because of how the identifiers are generated.
+
+-   Logoot
+-   LSEQ
+-   Astrong
+-   RGA (not as bad as the others). Interleaves words instead of characters.
+
+**Reordering**
+
+-   All algos have issues moving multiple nodes at once.
+
+**Efficiency**
+
+> Most to Least
+
+-   RGA
+-   LSEQ
+-   Logoot
+-   ????
+-   Woot
+-   Treedoc
