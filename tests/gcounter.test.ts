@@ -36,8 +36,11 @@ describe("GCounter Class", () => {
         b.incrementBy(2);
         c.incrementBy(3);
 
+        // Commutative
         expect(a.toMerged(b).value).toBe(b.toMerged(a).value);
+        // Idempotent
         expect(a.toMerged(a).value).toBe(a.value);
+        // Associative
         expect(a.toMerged(b).toMerged(c).value).toBe(
             a.toMerged(b.toMerged(c)).value
         );

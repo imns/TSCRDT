@@ -20,6 +20,8 @@ export class GCounter implements Mergable {
         this.#state = { [this.#siteID]: new Max(value) };
     }
 
+    // Get the current value of the GCounter instance. This is the sum of the values
+    // of all the Max instances in the state
     get value() {
         return Object.values(this.#state).reduce(
             (acc, cur) => acc + cur.value,
@@ -38,6 +40,7 @@ export class GCounter implements Mergable {
         this.#state[this.#siteID].value += value;
     }
 
+    // Merge the state of another GCounter instance into this instance and mutate the state
     merge(other: GCounter): void {
         for (const [siteID, max] of Object.entries(other.#state)) {
             if (this.#state[siteID]) {
@@ -48,18 +51,21 @@ export class GCounter implements Mergable {
         }
     }
 
+    // Return a new GCounter instance with the merged state of this instance and another instance
     toMerged(other: GCounter): GCounter {
         let copy = this.clone();
         copy.merge(other);
         return copy;
     }
 
+    // Return a new GCounter instance with the same state as this instance
     clone(): GCounter {
         let copy = new GCounter({ siteID: this.#siteID, value: 0 });
         copy.#state = { ...this.#state };
         return copy;
     }
 
+    // Serialize the state of the GCounter instance to a JSON string
     serialize() {
         const serializedState = {};
         for (const [siteID, max] of Object.entries(this.#state)) {
