@@ -13,7 +13,7 @@ CRDTs, or Conflict-Free Replicated Data Types, are data structures designed for 
 
 ## Where should I start?
 
-I would look at the GCounter class first and its corresponding tests.
+I would look at the [GCounter class](src/gcounter.ts) first and its [corresponding tests](tests/gcounter.test.ts).
 
 ## Tests
 
