@@ -8,8 +8,11 @@ describe("GCounter Class", () => {
     });
 
     test("increment", () => {
+        // User A
         var a = new GCounter({ value: 0 });
+        // User B
         var b = new GCounter({ value: 10 });
+
         b.merge(a);
         expect(b.value).toBe(10);
 
